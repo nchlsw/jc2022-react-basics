@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import TourCard from "./components/TourCard/TourCard";
+import Navbar from "./components/Navbar/Navbar";
+import Bandcard from "./components/Bandcard/Bandcard";
+import Membercard from "./components/Membercard/Membercard";
 
+//react can only return 1 element, to return more than 1 element use react fragment <> </>
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <div>
+        <Bandcard />
+        <h1>Welcome to my React </h1>
+        <h2> Hello fren</h2>
+      </div>
+      <div>
+        <TourCard />
+        <TourCard />
+        <TourCard />
+      </div>
+    </>
   );
 }
 
