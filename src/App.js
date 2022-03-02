@@ -1,3 +1,4 @@
+import { useState } from "react"; //use state is called react hooks
 import TourCard from "./components/TourCard/TourCard";
 import Navbar from "./components/Navbar/Navbar";
 import Bandcard from "./components/Bandcard/Bandcard";
@@ -5,84 +6,123 @@ import Membercard from "./components/Membercard/Membercard";
 import ClassComponent from "./components/ClassComponent/ClassComponent";
 import ContentCard from "./components/ContentCard/ContentCard";
 import TodoItem from "./components/TodoItem/TodoItem";
+import { Button, Input } from "reactstrap";
+import moment from "moment";
 
 //react can only return 1 element, to return more than 1 element use react fragment <> </>
 
-const data = [
-  // {
-  //   username: "Mark",
-  //   location: "BSD",
-  //   numberOfLikes: 120,
-  //   caption: "Halo",
-  // },
-  // {
-  //   username: "Seto",
-  //   location: "Jakarta",
-  //   numberOfLikes: 3,
-  //   caption: "Hello World",
-  // },
-  // {
-  //   username: "Bill",
-  //   location: "Puncak",
-  //   numberOfLikes: 314,
-  //   caption: "Halo Dunia",
-  // },
-  {
-    date: "March 2, 2022",
-    item: "Fundamental",
-    status: "done",
-  },
-  {
-    date: "March 3, 2022",
-    item: "CSS",
-    status: "On Going",
-  },
-  {
-    date: "March 4, 2022",
-    item: "HTML",
-    status: "done",
-  },
-  {
-    date: "March 5, 2022",
-    item: "JS",
-    status: "On Going",
-  },
-  {
-    date: "March 6, 2022",
-    item: "Programming",
-    status: "done",
-  },
-];
-// function App() {
-//   const renderContentlist = () => {
-//     return data.map((val) => {
-//       return (
-//         <ContentCard
-//           username={val.username}
-//           location={val.location}
-//           numberOfLikes={val.numberOfLikes}
-//           caption={val.caption}
-//         />
-//       );
-//     });
-//   };
 function App() {
+  const [todoList, setTodoList] = useState([
+    {
+      date: new Date(),
+      item: "Fundamental",
+      isDone: true,
+    },
+    {
+      date: new Date(),
+      item: "CSS",
+      isDone: false,
+    },
+    {
+      date: new Date(),
+      item: "HTML",
+      isDone: true,
+    },
+    {
+      date: new Date(),
+      item: "JS",
+      isDone: false,
+    },
+    {
+      date: new Date(),
+      item: "Programming",
+      isDone: true,
+    },
+  ]);
+
   const renderTodoList = () => {
-    return data.map((val) => {
-      return <TodoItem data={val.date} item={val.item} status={val.status} />;
+    return todoList.map((val, idx) => {
+      return (
+        <TodoItem
+          date={val.date}
+          item={val.item}
+          isDone={val.isDone}
+          deleteItem={() => {
+            deleteTodoList(idx);
+          }}
+          toggleStatus={() => {
+            toggleTodoStatus(idx);
+          }}
+        />
+      );
     });
+  };
+
+  const [todoInputValue, setTodoInputValue] = useState("");
+  const [dateInputValue, setDateInputValue] = useState(null);
+
+  const inputHandler = (event) => {
+    const { value } = event.target;
+    setTodoInputValue(value);
+  };
+
+  const dateInput = (event) => {
+    const { value } = event.target;
+    setDateInputValue(value);
+  };
+
+  const addTodoItem = () => {
+    const newTodoList = [...todoList];
+
+    newTodoList.push({
+      date: dateInputValue,
+      item: todoInputValue,
+      isDone: false,
+    });
+
+    setTodoList(newTodoList);
+  };
+
+  const deleteTodoList = (index) => {
+    const deleteTodoListArray = [...todoList];
+    deleteTodoListArray.splice(index, 1);
+
+    setTodoList(deleteTodoListArray);
+  };
+
+  const toggleTodoStatus = (index) => {
+    const duplicateTodoArray = [...todoList];
+
+    duplicateTodoArray[index].isDone = !duplicateTodoArray[index].isDone;
+    setTodoList(duplicateTodoArray);
   };
 
   return (
     <>
       {/* <Navbar /> */}
       <div className="container">
+        <div className="row my-3">
+          <div className="offset-3 col-5">
+            <Input onChange={inputHandler} />
+          </div>
+          <div className="col-2">
+            <Button onClick={addTodoItem} color="success">
+              Add Todo
+            </Button>
+          </div>
+          <div className="offset-3 col-5">
+            <Input type="date" onChange={dateInput} />
+          </div>
+        </div>
         <div className="row">
-          <div className="col-12 col-md-6 offset-md-3">
+          <div className="col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
             {/* {renderContentlist()} */}
             {renderTodoList()}
           </div>
         </div>
+
+        {/* <h1>{myUsername} </h1>
+        <button onClick={changeUsername}>Change username</button> */}
       </div>
     </>
   );
