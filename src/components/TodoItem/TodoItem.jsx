@@ -3,27 +3,31 @@ import { useState } from "react";
 import moment from "moment";
 
 const TodoItem = (props) => {
-  const [isDone, setIsDone] = useState(props.isDone);
-  const changeStatus = () => {
-    setIsDone(!isDone);
-  };
   return (
     <Card className="my-2">
       <CardBody>
         <div className="d-flex justify-content-between">
           <div>
             <CardTitle tag="h5" className="fw-bold">
-              {moment(props.date).format("DD MM YYYY")}
+              {moment(props.date).format("DD MMMM YYYY")}
             </CardTitle>
             <CardText>{props.item}</CardText>
           </div>
-          <div>
-            {isDone ? (
-              <Button className="mx-2" onClick={changeStatus} color="success">
+          <div className="d-flex align-items-center">
+            {props.isDone ? (
+              <Button
+                className="mx-2"
+                onClick={props.toggleStatus}
+                color="success"
+              >
                 Done
               </Button>
             ) : (
-              <Button className="mx-2" onClick={changeStatus} color="warning">
+              <Button
+                className="mx-2"
+                onClick={props.toggleStatus}
+                color="warning"
+              >
                 On Going
               </Button>
             )}

@@ -1,0 +1,40 @@
+{
+  "todos": [
+    {
+      "date": "2022-03-10",
+      "item": "mandi",
+      "isDone": true,
+      "id": 1
+    },
+    {
+      "date": "2022-03-22",
+      "item": "makan",
+      "isDone": true,
+      "id": 2
+    },
+    {
+      "date": "2022-03-23",
+      "item": "tidur",
+      "isDone": true,
+      "id": 3
+    },
+    {
+      "date": "2022-04-02",
+      "item": "kerja",
+      "isDone": false,
+      "id": 4
+    },
+    {
+      "date": "2022-04-02",
+      "item": "kerja lagi",
+      "isDone": false,
+      "id": 5
+    },
+    {
+      "date": "2022-04-19",
+      "item": "kerja lagi",
+      "isDone": false,
+      "id": 6
+    }
+  ]
+}
